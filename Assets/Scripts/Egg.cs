@@ -9,16 +9,36 @@ public class Egg : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Target"))
         {
-            Debug.Log("hit " + collision.gameObject.name + "!");
-
             CreateEggImpactEffect(collision);
             Destroy(gameObject);
         }
 
         if (collision.gameObject.CompareTag("Wall"))
         {
-            Debug.Log("hit a wall");
             CreateEggImpactEffect(collision);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("hit " + collision.gameObject.name + "!");
+            CreateEggImpactEffect(collision);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("hit " + collision.gameObject.name + "!");
+            CreateEggImpactEffect(collision);
+            ZombieBehaviour.ZombieTakesDamage(collision.gameObject, 25f); 
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("HealthObject"))
+        {
+            Debug.Log("hit " + collision.gameObject.name + "!");
+            CreateEggImpactEffect(collision);
+            PlayerHealth.RecoverHealth(50f);
             Destroy(gameObject);
         }
     }
